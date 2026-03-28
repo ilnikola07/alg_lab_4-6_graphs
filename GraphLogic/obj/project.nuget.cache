@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "im8BCvESr1M=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\111\\Desktop\\1 курс\\term2\\alg_lab\\GraphLogic\\GraphLogic.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\111\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.25\\microsoft.windowsdesktop.app.ref.8.0.25.nupkg.sha512",
+    "C:\\Users\\111\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.25\\microsoft.netcore.app.ref.8.0.25.nupkg.sha512",
+    "C:\\Users\\111\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.25\\microsoft.aspnetcore.app.ref.8.0.25.nupkg.sha512"
+  ],
+  "logs": []
+}

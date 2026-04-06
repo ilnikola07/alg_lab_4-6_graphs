@@ -38,13 +38,14 @@
             buttonClear = new Button();
             panelButtons = new Panel();
             buttonLook = new Button();
+            buttonLasts = new Button();
             panelButtons.SuspendLayout();
             SuspendLayout();
             // 
             // btnAbout
             // 
             btnAbout.BackgroundImageLayout = ImageLayout.Stretch;
-            btnAbout.Location = new Point(12, 170);
+            btnAbout.Location = new Point(12, 248);
             btnAbout.Name = "btnAbout";
             btnAbout.Size = new Size(171, 33);
             btnAbout.TabIndex = 0;
@@ -105,7 +106,7 @@
             // buttonClear
             // 
             buttonClear.BackgroundImageLayout = ImageLayout.Stretch;
-            buttonClear.Location = new Point(12, 131);
+            buttonClear.Location = new Point(12, 170);
             buttonClear.Name = "buttonClear";
             buttonClear.Size = new Size(171, 33);
             buttonClear.TabIndex = 6;
@@ -116,6 +117,7 @@
             // panelButtons
             // 
             panelButtons.BackColor = Color.Transparent;
+            panelButtons.Controls.Add(buttonLasts);
             panelButtons.Controls.Add(btnAbout);
             panelButtons.Controls.Add(buttonLook);
             panelButtons.Controls.Add(buttonClear);
@@ -138,6 +140,16 @@
             buttonLook.Text = "Посмотреть на фон 10 сек\r\n";
             buttonLook.UseVisualStyleBackColor = true;
             buttonLook.Click += buttonLook_Click;
+            // 
+            // buttonLasts
+            // 
+            buttonLasts.BackgroundImageLayout = ImageLayout.Stretch;
+            buttonLasts.Location = new Point(12, 131);
+            buttonLasts.Name = "buttonLasts";
+            buttonLasts.Size = new Size(171, 33);
+            buttonLasts.TabIndex = 8;
+            buttonLasts.Text = "Итоги";
+            buttonLasts.UseVisualStyleBackColor = true;
             // 
             // FormMain
             // 
@@ -166,5 +178,6 @@
         private Button buttonClear;
         private Panel panelButtons;
         private Button buttonLook;
+        private Button buttonLasts;
     }
 }

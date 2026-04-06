@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GraphLogic;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,70 @@ namespace lab_4_6_graph
         public Lab6Control()
         {
             InitializeComponent();
+        }
+
+
+        private CaveGraph caveSystem = new CaveGraph();
+
+        private void buttonLoadGraph_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog ofd = new OpenFileDialog())
+            {
+                // Фильтр только для текстовых файлов
+                ofd.Filter = "Текстовые файлы (*.txt)|*.txt|Все файлы (*.*)|*.*";
+                ofd.Title = "Выберите карту пещерной системы";
+
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        // 1. Очищаем старые данные в графе и в интерфейсе
+                        caveSystem.Clear();
+                        cmbStart.Items.Clear();
+
+                        // 2. Читаем файл построчно
+                        string[] lines = File.ReadAllLines(ofd.FileName);
+                        int edgeCount = 0;
+
+                        foreach (string line in lines)
+                        {
+                            if (string.IsNullOrWhiteSpace(line)) continue;
+
+                            // Предполагаем формат: Пещера1;Пещера2;Расстояние
+                            string[] parts = line.Split(';');
+                            if (parts.Length >= 3)
+                            {
+                                string from = parts[0].Trim();
+                                string to = parts[1].Trim();
+                                if (int.TryParse(parts[2].Trim(), out int weight))
+                                {
+                                    // Добавляем ребро в нашу библиотеку классов
+                                    caveSystem.AddEdge(from, to, weight);
+                                    edgeCount++;
+                                }
+                            }
+                        }
+
+                        // 3. Заполняем ComboBox-ы уникальными названиями пещер
+                        var allCaves = caveSystem.AdjacencyList.Keys.OrderBy(n => n).ToArray();
+                        cmbStart.Items.AddRange(allCaves);
+
+                        // 4. Информируем пользователя
+                        lblResult.Text = "Успешно загружено!\n" +
+                 $"Вершин (пещер): {allCaves.Length}\n" +
+                 $"Рёбер (тоннелей): {edgeCount}";
+
+                        // Выбираем первые элементы по умолчанию, чтобы не было пусто
+                        if (cmbStart.Items.Count > 0) cmbStart.SelectedIndex = 0;
+                        
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Ошибка при загрузке файла: {ex.Message}", "Ошибка",
+                                         MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
         }
     }
 }

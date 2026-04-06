@@ -37,8 +37,8 @@
             buttonExit = new Button();
             buttonClear = new Button();
             panelButtons = new Panel();
-            buttonLook = new Button();
             buttonLasts = new Button();
+            buttonLook = new Button();
             panelButtons.SuspendLayout();
             SuspendLayout();
             // 
@@ -83,6 +83,7 @@
             button6lab.TabIndex = 3;
             button6lab.Text = "Лабораторная работа №6";
             button6lab.UseVisualStyleBackColor = true;
+            button6lab.Click += button6lab_Click;
             // 
             // pnlContent
             // 
@@ -130,6 +131,16 @@
             panelButtons.Size = new Size(196, 362);
             panelButtons.TabIndex = 7;
             // 
+            // buttonLasts
+            // 
+            buttonLasts.BackgroundImageLayout = ImageLayout.Stretch;
+            buttonLasts.Location = new Point(12, 131);
+            buttonLasts.Name = "buttonLasts";
+            buttonLasts.Size = new Size(171, 33);
+            buttonLasts.TabIndex = 8;
+            buttonLasts.Text = "Итоги";
+            buttonLasts.UseVisualStyleBackColor = true;
+            // 
             // buttonLook
             // 
             buttonLook.BackgroundImageLayout = ImageLayout.Stretch;
@@ -140,16 +151,6 @@
             buttonLook.Text = "Посмотреть на фон 10 сек\r\n";
             buttonLook.UseVisualStyleBackColor = true;
             buttonLook.Click += buttonLook_Click;
-            // 
-            // buttonLasts
-            // 
-            buttonLasts.BackgroundImageLayout = ImageLayout.Stretch;
-            buttonLasts.Location = new Point(12, 131);
-            buttonLasts.Name = "buttonLasts";
-            buttonLasts.Size = new Size(171, 33);
-            buttonLasts.TabIndex = 8;
-            buttonLasts.Text = "Итоги";
-            buttonLasts.UseVisualStyleBackColor = true;
             // 
             // FormMain
             // 

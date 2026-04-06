@@ -66,6 +66,27 @@ namespace lab_4_6_graph
         }
 
 
+
+        private void button6lab_Click(object sender, EventArgs e)
+        {
+            //ShowControl(new Lab4Control());
+
+
+
+            // ќчищаем старое, если было
+            pnlContent.Controls.Clear();
+
+            Lab6Control lab6 = new Lab6Control();
+            lab6.Dock = DockStyle.Fill;
+
+            // —делаем сам контрол полупрозрачным, если хотим видеть фон
+            lab6.BackColor = Color.FromArgb(200, 255, 255, 255);
+
+            pnlContent.Controls.Add(lab6);
+            pnlContent.Visible = true; // ѕоказываем панель только после клика
+            pnlContent.BringToFront();
+        }
+
         private void buttonExit_Click(object sender, EventArgs e)
         {
             this.Close();

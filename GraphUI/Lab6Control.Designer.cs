@@ -86,6 +86,7 @@
             buttonLoadGraph.TabIndex = 29;
             buttonLoadGraph.Text = "Загрузить граф";
             buttonLoadGraph.UseVisualStyleBackColor = true;
+            buttonLoadGraph.Click += buttonLoadGraph_Click;
             // 
             // buttonNoConnecting
             // 

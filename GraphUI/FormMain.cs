@@ -44,6 +44,28 @@ namespace lab_4_6_graph
             pnlContent.BringToFront();
         }
 
+
+        private void button5lab_Click(object sender, EventArgs e)
+        {
+            //ShowControl(new Lab4Control());
+
+
+
+            // ќчищаем старое, если было
+            pnlContent.Controls.Clear();
+
+            Lab5Control lab5 = new Lab5Control();
+            lab5.Dock = DockStyle.Fill;
+
+            // —делаем сам контрол полупрозрачным, если хотим видеть фон
+            lab5.BackColor = Color.FromArgb(200, 255, 255, 255);
+
+            pnlContent.Controls.Add(lab5);
+            pnlContent.Visible = true; // ѕоказываем панель только после клика
+            pnlContent.BringToFront();
+        }
+
+
         private void buttonExit_Click(object sender, EventArgs e)
         {
             this.Close();

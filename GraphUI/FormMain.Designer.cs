@@ -71,6 +71,7 @@
             button5lab.TabIndex = 2;
             button5lab.Text = "Лабораторная работа №5";
             button5lab.UseVisualStyleBackColor = true;
+            button5lab.Click += button5lab_Click;
             // 
             // button6lab
             // 

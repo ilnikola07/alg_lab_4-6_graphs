@@ -152,7 +152,7 @@
             // 
             lblOutput.BackColor = Color.Transparent;
             lblOutput.BorderStyle = BorderStyle.FixedSingle;
-            lblOutput.Location = new Point(447, 27);
+            lblOutput.Location = new Point(204, 27);
             lblOutput.Name = "lblOutput";
             lblOutput.Size = new Size(179, 310);
             lblOutput.TabIndex = 22;
@@ -161,7 +161,7 @@
             // 
             lblMes.AutoSize = true;
             lblMes.BackColor = Color.Transparent;
-            lblMes.Location = new Point(447, 12);
+            lblMes.Location = new Point(204, 12);
             lblMes.Name = "lblMes";
             lblMes.Size = new Size(172, 15);
             lblMes.TabIndex = 23;
@@ -185,7 +185,7 @@
             Controls.Add(buttonBFS);
             Controls.Add(buttonLoadGraph);
             Name = "Lab4Control";
-            Size = new Size(649, 363);
+            Size = new Size(425, 363);
             Load += Lab4Control_Load;
             ResumeLayout(false);
             PerformLayout();

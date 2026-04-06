@@ -85,9 +85,9 @@
             // pnlContent
             // 
             pnlContent.BackColor = Color.Transparent;
-            pnlContent.Location = new Point(267, 18);
+            pnlContent.Location = new Point(240, 18);
             pnlContent.Name = "pnlContent";
-            pnlContent.Size = new Size(655, 362);
+            pnlContent.Size = new Size(432, 362);
             pnlContent.TabIndex = 4;
             // 
             // buttonExit
@@ -144,7 +144,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(934, 403);
+            ClientSize = new Size(702, 403);
             Controls.Add(panelButtons);
             Controls.Add(pnlContent);
             Name = "FormMain";

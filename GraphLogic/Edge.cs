@@ -29,7 +29,57 @@ namespace GraphLogic
                 AdjacencyList[target].Add(new Edge { Target = source, Weight = weight });
         }
 
-        // --- ЛАБОРАТОРНАЯ №4: ОБХОДЫ ---
+        public List<List<string>> FindConnectedComponents()
+        {
+            var components = new List<List<string>>();
+            var visited = new HashSet<string>();
+            var allVertices = AdjacencyList.Keys.ToList();
+
+            foreach (var vertex in allVertices)
+            {
+                if (!visited.Contains(vertex))
+                {
+                    var component = new List<string>();
+                    BFS_ForComponent(vertex, visited, component);
+                    components.Add(component);
+                }
+            }
+
+            return components;
+        }
+
+
+        // Вспомогательный метод BFS для сбора компоненты
+        private void BFS_ForComponent(string start, HashSet<string> visited, List<string> component)
+        {
+            var queue = new Queue<string>();
+            queue.Enqueue(start);
+            visited.Add(start);
+
+            while (queue.Count > 0)
+            {
+                var current = queue.Dequeue();
+                component.Add(current);
+
+                foreach (var neighbor in AdjacencyList[current])
+                {
+                    if (!visited.Contains(neighbor.Target))
+                    {
+                        visited.Add(neighbor.Target);
+                        queue.Enqueue(neighbor.Target);
+                    }
+                }
+            }
+        }
+
+
+
+        // Получить список всех вершин (удобно для UI)
+        public List<string> GetAllVertices()
+        {
+            return AdjacencyList.Keys.ToList();
+        }
+
 
         // BFS (Обход в ширину) - находит кратчайший путь по количеству ребер
         public List<string> GetBFS(string startNode)
@@ -83,5 +133,8 @@ namespace GraphLogic
         }
 
         public void Clear() => AdjacencyList.Clear();
+
+
+       
     }
 }

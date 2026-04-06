@@ -36,9 +36,11 @@
             cmbEnd = new ComboBox();
             labelStart = new Label();
             labelVivod = new Label();
-            txtOutput = new TextBox();
-            txtLog = new TextBox();
             labelMess = new Label();
+            btnCheckReachable = new Button();
+            btnFindComponents = new Button();
+            lblOutput = new Label();
+            lblMes = new Label();
             SuspendLayout();
             // 
             // buttonLoadGraph
@@ -53,9 +55,9 @@
             // 
             // buttonBFS
             // 
-            buttonBFS.Location = new Point(20, 42);
+            buttonBFS.Location = new Point(20, 158);
             buttonBFS.Name = "buttonBFS";
-            buttonBFS.Size = new Size(81, 24);
+            buttonBFS.Size = new Size(162, 24);
             buttonBFS.TabIndex = 1;
             buttonBFS.Text = "BFS";
             buttonBFS.UseVisualStyleBackColor = true;
@@ -63,92 +65,117 @@
             // 
             // buttonDFS
             // 
-            buttonDFS.Location = new Point(107, 42);
+            buttonDFS.Location = new Point(20, 188);
             buttonDFS.Name = "buttonDFS";
-            buttonDFS.Size = new Size(75, 24);
+            buttonDFS.Size = new Size(162, 24);
             buttonDFS.TabIndex = 2;
             buttonDFS.Text = "DFS";
             buttonDFS.UseVisualStyleBackColor = true;
+            buttonDFS.Click += buttonDFS_Click;
             // 
             // lblResult
             // 
             lblResult.BackColor = Color.Transparent;
             lblResult.BorderStyle = BorderStyle.FixedSingle;
-            lblResult.Location = new Point(220, 42);
+            lblResult.Location = new Point(18, 57);
             lblResult.Name = "lblResult";
-            lblResult.Size = new Size(174, 52);
+            lblResult.Size = new Size(162, 52);
             lblResult.TabIndex = 3;
             // 
             // cmbStart
             // 
             cmbStart.FormattingEnabled = true;
-            cmbStart.Location = new Point(18, 97);
+            cmbStart.Location = new Point(20, 270);
             cmbStart.Name = "cmbStart";
-            cmbStart.Size = new Size(165, 23);
+            cmbStart.Size = new Size(160, 23);
             cmbStart.TabIndex = 4;
             // 
             // cmbEnd
             // 
             cmbEnd.FormattingEnabled = true;
-            cmbEnd.Location = new Point(17, 143);
+            cmbEnd.Location = new Point(20, 314);
             cmbEnd.Name = "cmbEnd";
-            cmbEnd.Size = new Size(165, 23);
+            cmbEnd.Size = new Size(160, 23);
             cmbEnd.TabIndex = 5;
             // 
             // labelStart
             // 
             labelStart.AutoSize = true;
             labelStart.BackColor = Color.Transparent;
-            labelStart.Location = new Point(21, 79);
+            labelStart.Location = new Point(20, 252);
             labelStart.Name = "labelStart";
-            labelStart.Size = new Size(164, 15);
+            labelStart.Size = new Size(119, 15);
             labelStart.TabIndex = 6;
-            labelStart.Text = "Введите стартовую вершину";
+            labelStart.Text = "Стартовая вершина:";
             // 
             // labelVivod
             // 
             labelVivod.AutoSize = true;
             labelVivod.BackColor = Color.Transparent;
-            labelVivod.Location = new Point(17, 125);
+            labelVivod.Location = new Point(20, 296);
             labelVivod.Name = "labelVivod";
-            labelVivod.Size = new Size(162, 15);
+            labelVivod.Size = new Size(116, 15);
             labelVivod.TabIndex = 7;
-            labelVivod.Text = "Введите конечную вершину";
-            // 
-            // txtOutput
-            // 
-            txtOutput.Location = new Point(220, 200);
-            txtOutput.Name = "txtOutput";
-            txtOutput.Size = new Size(174, 23);
-            txtOutput.TabIndex = 8;
-            // 
-            // txtLog
-            // 
-            txtLog.BackColor = Color.White;
-            txtLog.Location = new Point(203, 268);
-            txtLog.Multiline = true;
-            txtLog.Name = "txtLog";
-            txtLog.ReadOnly = true;
-            txtLog.Size = new Size(174, 36);
-            txtLog.TabIndex = 9;
+            labelVivod.Text = "Конечная вершина:";
             // 
             // labelMess
             // 
             labelMess.AutoSize = true;
             labelMess.BackColor = Color.Transparent;
-            labelMess.Location = new Point(220, 12);
+            labelMess.Location = new Point(20, 42);
             labelMess.Name = "labelMess";
             labelMess.Size = new Size(135, 15);
             labelMess.TabIndex = 10;
             labelMess.Text = "Сообщение о загрузке:";
             // 
+            // btnCheckReachable
+            // 
+            btnCheckReachable.Location = new Point(20, 218);
+            btnCheckReachable.Name = "btnCheckReachable";
+            btnCheckReachable.Size = new Size(162, 24);
+            btnCheckReachable.TabIndex = 15;
+            btnCheckReachable.Text = "Проверить достижимость";
+            btnCheckReachable.UseVisualStyleBackColor = true;
+            btnCheckReachable.Click += btnCheckReachable_Click;
+            // 
+            // btnFindComponents
+            // 
+            btnFindComponents.Location = new Point(20, 126);
+            btnFindComponents.Name = "btnFindComponents";
+            btnFindComponents.Size = new Size(162, 24);
+            btnFindComponents.TabIndex = 16;
+            btnFindComponents.Text = "Компоненты";
+            btnFindComponents.UseVisualStyleBackColor = true;
+            btnFindComponents.Click += btnFindComponents_Click;
+            // 
+            // lblOutput
+            // 
+            lblOutput.BackColor = Color.Transparent;
+            lblOutput.BorderStyle = BorderStyle.FixedSingle;
+            lblOutput.Location = new Point(447, 27);
+            lblOutput.Name = "lblOutput";
+            lblOutput.Size = new Size(179, 310);
+            lblOutput.TabIndex = 22;
+            // 
+            // lblMes
+            // 
+            lblMes.AutoSize = true;
+            lblMes.BackColor = Color.Transparent;
+            lblMes.Location = new Point(447, 12);
+            lblMes.Name = "lblMes";
+            lblMes.Size = new Size(172, 15);
+            lblMes.TabIndex = 23;
+            lblMes.Text = "Тут и ниже будет вывод всего:";
+            // 
             // Lab4Control
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(lblMes);
+            Controls.Add(lblOutput);
+            Controls.Add(btnFindComponents);
+            Controls.Add(btnCheckReachable);
             Controls.Add(labelMess);
-            Controls.Add(txtLog);
-            Controls.Add(txtOutput);
             Controls.Add(labelVivod);
             Controls.Add(labelStart);
             Controls.Add(cmbEnd);
@@ -158,7 +185,7 @@
             Controls.Add(buttonBFS);
             Controls.Add(buttonLoadGraph);
             Name = "Lab4Control";
-            Size = new Size(474, 344);
+            Size = new Size(649, 363);
             Load += Lab4Control_Load;
             ResumeLayout(false);
             PerformLayout();
@@ -174,8 +201,10 @@
         private ComboBox cmbEnd;
         private Label labelStart;
         private Label labelVivod;
-        private TextBox txtOutput;
-        private TextBox txtLog;
         private Label labelMess;
+        private Button btnCheckReachable;
+        private Button btnFindComponents;
+        private Label lblOutput;
+        private Label lblMes;
     }
 }

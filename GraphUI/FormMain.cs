@@ -11,6 +11,7 @@ namespace lab_4_6_graph
         {
 
         }
+
         private void ShowControl(UserControl control)
         {
             // Очищаем панель от предыдущей лабы
@@ -41,6 +42,34 @@ namespace lab_4_6_graph
             pnlContent.Controls.Add(lab4);
             pnlContent.Visible = true; // Показываем панель только после клика
             pnlContent.BringToFront();
+        }
+
+        private void buttonExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private async void buttonLook_Click(object sender, EventArgs e)
+        {
+            // 1. Скрываем элементы на обеих панелях
+            foreach (Control ctrl in panelButtons.Controls)
+                ctrl.Visible = false;
+            foreach (Control ctrl in pnlContent.Controls)
+                ctrl.Visible = false;
+
+            // 2. Ждем 10 секунд
+            await Task.Delay(10000);
+
+            // 3. Возвращаем всё обратно
+            foreach (Control ctrl in panelButtons.Controls)
+                ctrl.Visible = true;
+            foreach (Control ctrl in pnlContent.Controls)
+                ctrl.Visible = true;
+        }
+
+        private void buttonClear_Click(object sender, EventArgs e)
+        {
+            pnlContent.Visible = false; // Панель исчезнет с экрана
         }
     }
 }

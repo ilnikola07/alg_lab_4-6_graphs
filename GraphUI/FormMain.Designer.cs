@@ -34,12 +34,17 @@
             button5lab = new Button();
             button6lab = new Button();
             pnlContent = new Panel();
+            buttonExit = new Button();
+            buttonClear = new Button();
+            panelButtons = new Panel();
+            buttonLook = new Button();
+            panelButtons.SuspendLayout();
             SuspendLayout();
             // 
             // btnAbout
             // 
             btnAbout.BackgroundImageLayout = ImageLayout.Stretch;
-            btnAbout.Location = new Point(12, 177);
+            btnAbout.Location = new Point(12, 170);
             btnAbout.Name = "btnAbout";
             btnAbout.Size = new Size(171, 33);
             btnAbout.TabIndex = 0;
@@ -49,7 +54,7 @@
             // button4lab
             // 
             button4lab.BackgroundImageLayout = ImageLayout.Stretch;
-            button4lab.Location = new Point(12, 28);
+            button4lab.Location = new Point(12, 14);
             button4lab.Name = "button4lab";
             button4lab.Size = new Size(171, 33);
             button4lab.TabIndex = 1;
@@ -60,7 +65,7 @@
             // button5lab
             // 
             button5lab.BackgroundImageLayout = ImageLayout.Stretch;
-            button5lab.Location = new Point(12, 76);
+            button5lab.Location = new Point(12, 53);
             button5lab.Name = "button5lab";
             button5lab.Size = new Size(171, 33);
             button5lab.TabIndex = 2;
@@ -70,7 +75,7 @@
             // button6lab
             // 
             button6lab.BackgroundImageLayout = ImageLayout.Stretch;
-            button6lab.Location = new Point(12, 124);
+            button6lab.Location = new Point(12, 92);
             button6lab.Name = "button6lab";
             button6lab.Size = new Size(171, 33);
             button6lab.TabIndex = 3;
@@ -80,10 +85,58 @@
             // pnlContent
             // 
             pnlContent.BackColor = Color.Transparent;
-            pnlContent.Location = new Point(205, 28);
+            pnlContent.Location = new Point(267, 18);
             pnlContent.Name = "pnlContent";
-            pnlContent.Size = new Size(447, 330);
+            pnlContent.Size = new Size(655, 362);
             pnlContent.TabIndex = 4;
+            // 
+            // buttonExit
+            // 
+            buttonExit.BackgroundImageLayout = ImageLayout.Stretch;
+            buttonExit.Location = new Point(12, 287);
+            buttonExit.Name = "buttonExit";
+            buttonExit.Size = new Size(171, 33);
+            buttonExit.TabIndex = 5;
+            buttonExit.Text = "Выход из приложения";
+            buttonExit.UseVisualStyleBackColor = true;
+            buttonExit.Click += buttonExit_Click;
+            // 
+            // buttonClear
+            // 
+            buttonClear.BackgroundImageLayout = ImageLayout.Stretch;
+            buttonClear.Location = new Point(12, 131);
+            buttonClear.Name = "buttonClear";
+            buttonClear.Size = new Size(171, 33);
+            buttonClear.TabIndex = 6;
+            buttonClear.Text = "Очистить экран справа\r\n";
+            buttonClear.UseVisualStyleBackColor = true;
+            buttonClear.Click += buttonClear_Click;
+            // 
+            // panelButtons
+            // 
+            panelButtons.BackColor = Color.Transparent;
+            panelButtons.Controls.Add(btnAbout);
+            panelButtons.Controls.Add(buttonLook);
+            panelButtons.Controls.Add(buttonClear);
+            panelButtons.Controls.Add(buttonExit);
+            panelButtons.Controls.Add(button5lab);
+            panelButtons.Controls.Add(button6lab);
+            panelButtons.Controls.Add(button4lab);
+            panelButtons.Location = new Point(12, 18);
+            panelButtons.Name = "panelButtons";
+            panelButtons.Size = new Size(196, 362);
+            panelButtons.TabIndex = 7;
+            // 
+            // buttonLook
+            // 
+            buttonLook.BackgroundImageLayout = ImageLayout.Stretch;
+            buttonLook.Location = new Point(12, 209);
+            buttonLook.Name = "buttonLook";
+            buttonLook.Size = new Size(171, 33);
+            buttonLook.TabIndex = 7;
+            buttonLook.Text = "Посмотреть на фон 10 сек\r\n";
+            buttonLook.UseVisualStyleBackColor = true;
+            buttonLook.Click += buttonLook_Click;
             // 
             // FormMain
             // 
@@ -91,15 +144,13 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(673, 382);
+            ClientSize = new Size(934, 403);
+            Controls.Add(panelButtons);
             Controls.Add(pnlContent);
-            Controls.Add(button6lab);
-            Controls.Add(button5lab);
-            Controls.Add(button4lab);
-            Controls.Add(btnAbout);
             Name = "FormMain";
             Text = "Пещеры";
             Load += FormMain_Load;
+            panelButtons.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -110,5 +161,9 @@
         private Button button5lab;
         private Button button6lab;
         private Panel pnlContent;
+        private Button buttonExit;
+        private Button buttonClear;
+        private Panel panelButtons;
+        private Button buttonLook;
     }
 }

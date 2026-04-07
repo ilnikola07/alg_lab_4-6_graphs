@@ -100,13 +100,13 @@ namespace lab_4_6_graph
             stopwatch.Stop();
 
             var sb = new StringBuilder();
-            sb.AppendLine($"Кратчайшие расстояния от '{start}':\n");
+            sb.AppendLine($"Кратчайшие расстояния от {start}:\n");
             foreach (var kvp in distances.OrderBy(x => x.Value))
             {
-                string dist = kvp.Value == int.MaxValue ? " (недостижима)" : kvp.Value.ToString() + " м";
+                string dist = kvp.Value == int.MaxValue ? " (недостижима)" : kvp.Value.ToString() + "м";
                 sb.AppendLine($"{kvp.Key,-20} {dist}");
             }
-            sb.AppendLine($"\nВремя выполнения: {stopwatch.ElapsedMilliseconds} мс");
+            sb.AppendLine($"\nВремя выполнения: {stopwatch.ElapsedMilliseconds}мс");
 
             lblOutput.Text = sb.ToString();
         }
@@ -130,15 +130,15 @@ namespace lab_4_6_graph
             var sb = new StringBuilder();
             if (path.Count == 0 || distances[to] == int.MaxValue)
             {
-                sb.AppendLine($"Путь от '{from}' до '{to}' не найден!");
+                sb.AppendLine($"Путь от {from} до {to} не найден!");
             }
             else
             {
-                sb.AppendLine($"Кратчайший маршрут от '{from}' до '{to}':\n");
+                sb.AppendLine($"Кратчайший маршрут от {from} до {to}:\n");
                 sb.AppendLine(string.Join(" -> ", path));
-                sb.AppendLine($"\nОбщая длина: {distances[to]} м");
+                sb.AppendLine($"Общая длина: {distances[to]}м");
             }
-            sb.AppendLine($"\nВремя выполнения: {stopwatch.ElapsedMilliseconds} мс");
+            sb.AppendLine($"\nВремя выполнения: {stopwatch.ElapsedMilliseconds}мс");
 
             lblOutput.Text = sb.ToString();
         }

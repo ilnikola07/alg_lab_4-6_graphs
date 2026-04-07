@@ -103,9 +103,9 @@ namespace lab_4_6_graph
                 {
                     sb.AppendLine($"{point}");
                 }
-                sb.AppendLine($"\n Удаление любой из этих пещер разорвёт систему на части!");
+                sb.AppendLine($"\nУдаление любой из этих пещер разорвёт систему на части!");
             }
-            sb.AppendLine($"\n Время выполнения: {stopwatch.ElapsedMilliseconds} мс");
+            sb.AppendLine($"\nВремя выполнения: {stopwatch.ElapsedMilliseconds}мс");
 
             lblOutput.Text = sb.ToString();
         }
@@ -134,30 +134,15 @@ namespace lab_4_6_graph
             else
             {
                 sb.AppendLine("Рёбра МОД:");
-
-                // ВАЖНО: Так как у Edge нет свойства From, нам нужно знать, как библиотека хранит связи.
-                // Часто в таких лабораторных работах ребра в MST хранятся как "Parent -> Child".
-                // Если CaveGraph возвращает Dictionary<string, Edge> (где ключ - это текущая вершина, а Edge.Target - родитель),
-                // то код будет другим.
-
-                // ПОПРОБУЙТЕ ЭТОТ ВАРИАНТ (если mstEdges это List<Edge>):
-                // Скорее всего, вам придется вывести просто веса или целевые узлы, 
-                // ЛИБО библиотека возвращает не List<Edge>, а List<(string U, string V, int W)>
-
-                // Попробуем вывести через foreach с явным типом, чтобы понять структуру:
                 foreach (var edge in mstEdges)
                 {
-                    // Так как у Edge есть только Target и Weight, мы не знаем Source.
-                    // Это ошибка проектирования библиотеки для задачи MST.
-
-                    // ВРЕМЕННЫЙ КОД ДЛЯ ОТЛАДКИ:
-                    sb.AppendLine($"  ... -> {edge.Target} (Вес: {edge.Weight})");
+                    sb.AppendLine($"-> {edge.Target} ({edge.Weight})");
                 }
 
-                sb.AppendLine($"\n Суммарная длина тоннелей: {totalWeight} м");
-                sb.AppendLine($" Количество рёбер: {mstEdges.Count}");
+                sb.AppendLine($"\nСуммарная длина тоннелей: {totalWeight}м");
+                sb.AppendLine($"Количество рёбер: {mstEdges.Count}");
             }
-            sb.AppendLine($"\n Время выполнения: {stopwatch.ElapsedMilliseconds} мс");
+            sb.AppendLine($"\nВремя выполнения: {stopwatch.ElapsedMilliseconds}мс");
 
             lblOutput.Text = sb.ToString();
         }
@@ -187,7 +172,7 @@ namespace lab_4_6_graph
                                 $"Доступные вершины:\n{string.Join(", ", allVertices.Take(10))}" +
                                 (allVertices.Count > 10 ? "..." : "");
                 stopwatch.Stop();
-                lblOutput.Text += $"\n\n Время выполнения: {stopwatch.ElapsedMilliseconds} мс";
+                lblOutput.Text += $"\nВремя выполнения: {stopwatch.ElapsedMilliseconds}мс";
                 return;
             }
 
@@ -196,11 +181,11 @@ namespace lab_4_6_graph
             stopwatch.Stop();
 
             var sb = new StringBuilder();
-            sb.AppendLine($" Задача варианта 9: выход из пещеры '{start}'\n");
+            sb.AppendLine($"Задача варианта 9: выход из пещеры {start}\n");
 
             if (path.Count == 0 || distances[exit] == int.MaxValue)
             {
-                sb.AppendLine($"Выход '{exit}' недостижим из '{start}'!");
+                sb.AppendLine($"Выход {exit} недостижим из {start}!");
                 sb.AppendLine("Проверьте связность графа или используйте поиск компонент.");
             }
             else
@@ -210,10 +195,10 @@ namespace lab_4_6_graph
                 {
                     sb.AppendLine($"  {i + 1}. {path[i]}");
                 }
-                sb.AppendLine($"\nОбщая длина маршрута: {distances[exit]} м");
+                sb.AppendLine($"\nОбщая длина маршрута: {distances[exit]}м");
                 sb.AppendLine($"Количество переходов: {path.Count - 1}");
             }
-            sb.AppendLine($"\nВремя выполнения: {stopwatch.ElapsedMilliseconds} мс");
+            sb.AppendLine($"\nВремя выполнения: {stopwatch.ElapsedMilliseconds}мс");
 
             lblOutput.Text = sb.ToString();
         }

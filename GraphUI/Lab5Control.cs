@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace lab_4_6_graph
 {
@@ -82,6 +83,64 @@ namespace lab_4_6_graph
                     }
                 }
             }
+        }
+
+
+        private void btnDijkstraAll_Click(object sender, EventArgs e)
+        {
+            string start = cmbStart.SelectedItem?.ToString();
+            if (string.IsNullOrEmpty(start))
+            {
+                lblOutput.Text = "Выберите стартовую пещеру!";
+                return;
+            }
+
+            var stopwatch = Stopwatch.StartNew();
+            var distances = caveSystem.Dijkstra(start);
+            stopwatch.Stop();
+
+            var sb = new StringBuilder();
+            sb.AppendLine($"Кратчайшие расстояния от '{start}':\n");
+            foreach (var kvp in distances.OrderBy(x => x.Value))
+            {
+                string dist = kvp.Value == int.MaxValue ? " (недостижима)" : kvp.Value.ToString() + " м";
+                sb.AppendLine($"{kvp.Key,-20} {dist}");
+            }
+            sb.AppendLine($"\nВремя выполнения: {stopwatch.ElapsedMilliseconds} мс");
+
+            lblOutput.Text = sb.ToString();
+        }
+
+        private void btnDijkstraPath_Click(object sender, EventArgs e)
+        {
+            string from = cmbStart.SelectedItem?.ToString();
+            string to = cmbEnd.SelectedItem?.ToString();
+
+            if (string.IsNullOrEmpty(from) || string.IsNullOrEmpty(to))
+            {
+                lblOutput.Text = "Выберите обе пещеры!";
+                return;
+            }
+
+            var stopwatch = Stopwatch.StartNew();
+            var path = caveSystem.GetShortestPath(from, to);
+            var distances = caveSystem.Dijkstra(from);
+            stopwatch.Stop();
+
+            var sb = new StringBuilder();
+            if (path.Count == 0 || distances[to] == int.MaxValue)
+            {
+                sb.AppendLine($"Путь от '{from}' до '{to}' не найден!");
+            }
+            else
+            {
+                sb.AppendLine($"Кратчайший маршрут от '{from}' до '{to}':\n");
+                sb.AppendLine(string.Join(" -> ", path));
+                sb.AppendLine($"\nОбщая длина: {distances[to]} м");
+            }
+            sb.AppendLine($"\nВремя выполнения: {stopwatch.ElapsedMilliseconds} мс");
+
+            lblOutput.Text = sb.ToString();
         }
     }
 }

@@ -33,8 +33,8 @@
             labelMess = new Label();
             lblResult = new Label();
             buttonLoadGraph = new Button();
-            buttonShortestAll = new Button();
-            buttonBetween = new Button();
+            btnDijkstraAll = new Button();
+            btnDijkstraPath = new Button();
             labelVivod = new Label();
             labelStart = new Label();
             cmbEnd = new ComboBox();
@@ -89,23 +89,25 @@
             buttonLoadGraph.UseVisualStyleBackColor = true;
             buttonLoadGraph.Click += buttonLoadGraph_Click;
             // 
-            // buttonShortestAll
+            // btnDijkstraAll
             // 
-            buttonShortestAll.Location = new Point(23, 133);
-            buttonShortestAll.Name = "buttonShortestAll";
-            buttonShortestAll.Size = new Size(162, 24);
-            buttonShortestAll.TabIndex = 35;
-            buttonShortestAll.Text = "Расстояние до всех";
-            buttonShortestAll.UseVisualStyleBackColor = true;
+            btnDijkstraAll.Location = new Point(23, 133);
+            btnDijkstraAll.Name = "btnDijkstraAll";
+            btnDijkstraAll.Size = new Size(162, 24);
+            btnDijkstraAll.TabIndex = 35;
+            btnDijkstraAll.Text = "Расстояние до всех";
+            btnDijkstraAll.UseVisualStyleBackColor = true;
+            btnDijkstraAll.Click += btnDijkstraAll_Click;
             // 
-            // buttonBetween
+            // btnDijkstraPath
             // 
-            buttonBetween.Location = new Point(23, 163);
-            buttonBetween.Name = "buttonBetween";
-            buttonBetween.Size = new Size(162, 24);
-            buttonBetween.TabIndex = 36;
-            buttonBetween.Text = "Расстояние между двумя ";
-            buttonBetween.UseVisualStyleBackColor = true;
+            btnDijkstraPath.Location = new Point(23, 163);
+            btnDijkstraPath.Name = "btnDijkstraPath";
+            btnDijkstraPath.Size = new Size(162, 24);
+            btnDijkstraPath.TabIndex = 36;
+            btnDijkstraPath.Text = "Расстояние между двумя ";
+            btnDijkstraPath.UseVisualStyleBackColor = true;
+            btnDijkstraPath.Click += btnDijkstraPath_Click;
             // 
             // labelVivod
             // 
@@ -151,8 +153,8 @@
             Controls.Add(labelStart);
             Controls.Add(cmbEnd);
             Controls.Add(cmbStart);
-            Controls.Add(buttonBetween);
-            Controls.Add(buttonShortestAll);
+            Controls.Add(btnDijkstraPath);
+            Controls.Add(btnDijkstraAll);
             Controls.Add(labelMess);
             Controls.Add(lblResult);
             Controls.Add(buttonLoadGraph);
@@ -171,8 +173,8 @@
         private Label labelMess;
         private Label lblResult;
         private Button buttonLoadGraph;
-        private Button buttonShortestAll;
-        private Button buttonBetween;
+        private Button btnDijkstraAll;
+        private Button btnDijkstraPath;
         private Label labelVivod;
         private Label labelStart;
         private ComboBox cmbEnd;

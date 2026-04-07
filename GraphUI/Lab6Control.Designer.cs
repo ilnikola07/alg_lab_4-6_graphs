@@ -33,9 +33,9 @@
             labelMess = new Label();
             lblResult = new Label();
             buttonLoadGraph = new Button();
-            buttonNoConnecting = new Button();
-            buttonMinOstTree = new Button();
-            buttonShortExit = new Button();
+            btnArticulationPoints = new Button();
+            btnMST = new Button();
+            btnVariantTask = new Button();
             labelStart = new Label();
             cmbStart = new ComboBox();
             SuspendLayout();
@@ -88,32 +88,35 @@
             buttonLoadGraph.UseVisualStyleBackColor = true;
             buttonLoadGraph.Click += buttonLoadGraph_Click;
             // 
-            // buttonNoConnecting
+            // btnArticulationPoints
             // 
-            buttonNoConnecting.Location = new Point(17, 134);
-            buttonNoConnecting.Name = "buttonNoConnecting";
-            buttonNoConnecting.Size = new Size(162, 24);
-            buttonNoConnecting.TabIndex = 36;
-            buttonNoConnecting.Text = "Поиск точек сочленения";
-            buttonNoConnecting.UseVisualStyleBackColor = true;
+            btnArticulationPoints.Location = new Point(17, 134);
+            btnArticulationPoints.Name = "btnArticulationPoints";
+            btnArticulationPoints.Size = new Size(162, 24);
+            btnArticulationPoints.TabIndex = 36;
+            btnArticulationPoints.Text = "Поиск точек сочленения";
+            btnArticulationPoints.UseVisualStyleBackColor = true;
+            btnArticulationPoints.Click += btnArticulationPoints_Click;
             // 
-            // buttonMinOstTree
+            // btnMST
             // 
-            buttonMinOstTree.Location = new Point(17, 164);
-            buttonMinOstTree.Name = "buttonMinOstTree";
-            buttonMinOstTree.Size = new Size(162, 24);
-            buttonMinOstTree.TabIndex = 37;
-            buttonMinOstTree.Text = "Остовное дерево\r\n";
-            buttonMinOstTree.UseVisualStyleBackColor = true;
+            btnMST.Location = new Point(17, 164);
+            btnMST.Name = "btnMST";
+            btnMST.Size = new Size(162, 24);
+            btnMST.TabIndex = 37;
+            btnMST.Text = "Остовное дерево\r\n";
+            btnMST.UseVisualStyleBackColor = true;
+            btnMST.Click += btnMST_Click;
             // 
-            // buttonShortExit
+            // btnVariantTask
             // 
-            buttonShortExit.Location = new Point(17, 194);
-            buttonShortExit.Name = "buttonShortExit";
-            buttonShortExit.Size = new Size(162, 24);
-            buttonShortExit.TabIndex = 38;
-            buttonShortExit.Text = "Найти выход из ...";
-            buttonShortExit.UseVisualStyleBackColor = true;
+            btnVariantTask.Location = new Point(17, 194);
+            btnVariantTask.Name = "btnVariantTask";
+            btnVariantTask.Size = new Size(162, 24);
+            btnVariantTask.TabIndex = 38;
+            btnVariantTask.Text = "Найти выход из ...";
+            btnVariantTask.UseVisualStyleBackColor = true;
+            btnVariantTask.Click += btnVariantTask_Click;
             // 
             // labelStart
             // 
@@ -139,9 +142,9 @@
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(labelStart);
             Controls.Add(cmbStart);
-            Controls.Add(buttonShortExit);
-            Controls.Add(buttonMinOstTree);
-            Controls.Add(buttonNoConnecting);
+            Controls.Add(btnVariantTask);
+            Controls.Add(btnMST);
+            Controls.Add(btnArticulationPoints);
             Controls.Add(labelMess);
             Controls.Add(lblResult);
             Controls.Add(buttonLoadGraph);
@@ -160,9 +163,9 @@
         private Label labelMess;
         private Label lblResult;
         private Button buttonLoadGraph;
-        private Button buttonNoConnecting;
-        private Button buttonMinOstTree;
-        private Button buttonShortExit;
+        private Button btnArticulationPoints;
+        private Button btnMST;
+        private Button btnVariantTask;
         private Label labelStart;
         private ComboBox cmbStart;
     }

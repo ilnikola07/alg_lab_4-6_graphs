@@ -86,10 +86,11 @@
             // 
             // pnlContent
             // 
+            pnlContent.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pnlContent.BackColor = Color.Transparent;
             pnlContent.Location = new Point(240, 18);
             pnlContent.Name = "pnlContent";
-            pnlContent.Size = new Size(432, 362);
+            pnlContent.Size = new Size(433, 359);
             pnlContent.TabIndex = 4;
             // 
             // buttonExit
@@ -116,6 +117,7 @@
             // 
             // panelButtons
             // 
+            panelButtons.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panelButtons.BackColor = Color.Transparent;
             panelButtons.Controls.Add(buttonExit);
             panelButtons.Controls.Add(btnAbout);
@@ -126,7 +128,7 @@
             panelButtons.Controls.Add(button4lab);
             panelButtons.Location = new Point(12, 18);
             panelButtons.Name = "panelButtons";
-            panelButtons.Size = new Size(196, 362);
+            panelButtons.Size = new Size(197, 359);
             panelButtons.TabIndex = 7;
             // 
             // buttonLook
@@ -146,9 +148,10 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(702, 403);
+            ClientSize = new Size(703, 400);
             Controls.Add(panelButtons);
             Controls.Add(pnlContent);
+            MaximizeBox = false;
             Name = "FormMain";
             Text = "Пещеры";
             Load += FormMain_Load;

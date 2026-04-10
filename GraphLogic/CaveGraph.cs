@@ -9,9 +9,6 @@ namespace GraphLogic
     {
         public string Target { get; set; }
         public int Weight { get; set; }
-
-
-
     }
 
     public class CaveGraph
@@ -47,13 +44,12 @@ namespace GraphLogic
                     components.Add(component);
                 }
             }
-
             return components;
         }
 
 
         // Вспомогательный метод BFS для сбора компоненты
-        private void BFS_ForComponent(string start, HashSet<string> visited, List<string> component)
+        public void BFS_ForComponent(string start, HashSet<string> visited, List<string> component)
         {
             var queue = new Queue<string>();
             queue.Enqueue(start);
@@ -118,7 +114,7 @@ namespace GraphLogic
             return visited;
         }
 
-        private void DFS_Recursive(string current, List<string> visited)
+        public void DFS_Recursive(string current, List<string> visited)
         {
             if (!AdjacencyList.ContainsKey(current) || visited.Contains(current)) return;
 
@@ -195,37 +191,7 @@ namespace GraphLogic
         /// Восстанавливает и возвращает список вершин кратчайшего пути от startNode до endNode.
         /// Использует данные, полученные из алгоритма Дейкстры.
         /// </summary>
-        //public List<string> GetShortestPath(string startNode, string endNode)
-        //{
-        //    var distances = Dijkstra(startNode);
 
-        //    // Если конечная вершина недостижима
-        //    if (distances[endNode] == int.MaxValue)
-        //    {
-        //        return new List<string>(); // Возвращаем пустой список
-        //    }
-
-        //    var path = new Stack<string>();
-        //    string current = endNode;
-
-        //    // Восстанавливаем путь, двигаясь назад от конца к началу
-        //    while (current != null)
-        //    {
-        //        path.Push(current);
-        //        // Чтобы найти предыдущую вершину, нам нужно снова запустить логику Дейкстры,
-        //        // но для простоты можно модифицировать основной метод, чтобы он возвращал и previousNodes.
-        //        // Для текущей архитектуры мы можем сделать небольшой хак или добавить вспомогательный метод.
-        //        // Более правильный вариант - изменить Dijkstra, чтобы он возвращал кортеж (distances, previousNodes).
-
-        //        // --- Исправление для более чистой архитектуры ---
-        //        // Лучше создать приватный метод, который возвращает оба словаря
-        //        var dijkstraResult = RunDijkstraFull(startNode);
-        //        var prev = dijkstraResult.PreviousNodes[current];
-        //        current = prev;
-        //    }
-
-        //    return path.ToList();
-        //}
 
         // Приватная структура для хранения результатов полного запуска Дейкстры
         private class DijkstraResult
@@ -277,12 +243,6 @@ namespace GraphLogic
             return new DijkstraResult { Distances = distances, PreviousNodes = previousNodes };
         }
 
-        // Переписываем публичные методы, чтобы они использовали общую логику
-        //public Dictionary<string, int> Dijkstra(string startNode)
-        //{
-        //    return RunDijkstraFull(startNode).Distances;
-        //}
-
         public List<string> GetShortestPath(string startNode, string endNode)
         {
             var result = RunDijkstraFull(startNode);
@@ -297,11 +257,6 @@ namespace GraphLogic
             }
             return path.ToList();
         }
-
-
-
-
-        // Вставьте этот код внутрь класса CaveGraph
 
         /// <summary>
         /// Находит все точки сочленения в графе.
@@ -364,12 +319,6 @@ namespace GraphLogic
             return articulationPoints.ToList();
         }
 
-
-
-
-
-        // Вставьте этот код внутрь класса CaveGraph
-
         /// <summary>
         /// Строит минимальное остовное дерево с помощью алгоритма Прима.
         /// Возвращает список ребер, входящих в МОД, и его общий вес.
@@ -419,12 +368,8 @@ namespace GraphLogic
                     }
                 }
             }
-
             return (mstEdges, totalWeight);
         }
-
-
-
 
     }
 }

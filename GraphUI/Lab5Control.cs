@@ -100,13 +100,15 @@ namespace lab_4_6_graph
             stopwatch.Stop();
 
             var sb = new StringBuilder();
+            string time = stopwatch.Elapsed.TotalMilliseconds.ToString("0.000") + " мс";
+
+            sb.AppendLine($"Время выполнения: {time}");
             sb.AppendLine($"Кратчайшие расстояния от {start}:\n");
             foreach (var kvp in distances.OrderBy(x => x.Value))
             {
                 string dist = kvp.Value == int.MaxValue ? " (недостижима)" : kvp.Value.ToString() + "м";
                 sb.AppendLine($"{kvp.Key,-20} {dist}");
             }
-            sb.AppendLine($"\nВремя выполнения: {stopwatch.ElapsedMilliseconds}мс");
 
             lblOutput.Text = sb.ToString();
         }
@@ -128,6 +130,10 @@ namespace lab_4_6_graph
             stopwatch.Stop();
 
             var sb = new StringBuilder();
+            string time = stopwatch.Elapsed.TotalMilliseconds.ToString("0.000") + " мс";
+
+            sb.AppendLine($"Время выполнения: {time}");
+
             if (path.Count == 0 || distances[to] == int.MaxValue)
             {
                 sb.AppendLine($"Путь от {from} до {to} не найден!");
@@ -138,7 +144,6 @@ namespace lab_4_6_graph
                 sb.AppendLine(string.Join(" -> ", path));
                 sb.AppendLine($"Общая длина: {distances[to]}м");
             }
-            sb.AppendLine($"\nВремя выполнения: {stopwatch.ElapsedMilliseconds}мс");
 
             lblOutput.Text = sb.ToString();
         }

@@ -91,6 +91,9 @@ namespace lab_4_6_graph
             stopwatch.Stop();
 
             var sb = new StringBuilder();
+            string time = stopwatch.Elapsed.TotalMilliseconds.ToString("0.000") + " мс";
+
+            sb.AppendLine($"Время выполнения: {time}");
             sb.AppendLine("Точки сочленения (критические пещеры):\n");
 
             if (points.Count == 0)
@@ -105,7 +108,6 @@ namespace lab_4_6_graph
                 }
                 sb.AppendLine($"\nУдаление любой из этих пещер разорвёт систему на части!");
             }
-            sb.AppendLine($"\nВремя выполнения: {stopwatch.ElapsedMilliseconds}мс");
 
             lblOutput.Text = sb.ToString();
         }
@@ -113,17 +115,15 @@ namespace lab_4_6_graph
         private void btnMST_Click(object sender, EventArgs e)
         {
             var stopwatch = Stopwatch.StartNew();
-
-            // Получаем данные. Обратите внимание на тип возвращаемого значения!
             var result = caveSystem.PrimsAlgorithm();
-
             stopwatch.Stop();
 
             var sb = new StringBuilder();
+            string time = stopwatch.Elapsed.TotalMilliseconds.ToString("0.000") + " мс";
+
+            sb.AppendLine($"Время выполнения: {time}");
             sb.AppendLine("Минимальное остовное дерево (алгоритм Прима):\n");
 
-            // Предположим, что result.Item1 - это список ребер, а result.Item2 - вес
-            // Если PrimsAlgorithm возвращает кортеж (List<Edge>, int):
             var mstEdges = result.Item1;
             var totalWeight = result.Item2;
 
@@ -138,22 +138,18 @@ namespace lab_4_6_graph
                 {
                     sb.AppendLine($"-> {edge.Target} ({edge.Weight})");
                 }
-
                 sb.AppendLine($"\nСуммарная длина тоннелей: {totalWeight}м");
                 sb.AppendLine($"Количество рёбер: {mstEdges.Count}");
             }
-            sb.AppendLine($"\nВремя выполнения: {stopwatch.ElapsedMilliseconds}мс");
 
             lblOutput.Text = sb.ToString();
         }
 
+
         private void btnVariantTask_Click(object sender, EventArgs e)
         {
-            // ВАРИАНТ 9: Найти кратчайший маршрут выхода из пещеры
-            // Предположим, что "Выход" — это специальная вершина, или пользователь выбирает её
-
             string start = cmbStart.SelectedItem?.ToString();
-            string exit = "Выход"; // Или добавьте cmbExit и берите из него
+            string exit = "Выход";
 
             if (string.IsNullOrEmpty(start))
             {
@@ -162,17 +158,19 @@ namespace lab_4_6_graph
             }
 
             var stopwatch = Stopwatch.StartNew();
-
-            // Проверяем, существует ли вершина "Выход"
             var allVertices = caveSystem.GetAllVertices();
+
             if (!allVertices.Contains(exit))
             {
-                // Если "Выход" не найден, предлагаем выбрать конечную вершину
                 lblOutput.Text = $"Вершина '{exit}' не найдена в графе.\n" +
                                 $"Доступные вершины:\n{string.Join(", ", allVertices.Take(10))}" +
                                 (allVertices.Count > 10 ? "..." : "");
                 stopwatch.Stop();
-                lblOutput.Text += $"\nВремя выполнения: {stopwatch.ElapsedMilliseconds}мс";
+
+                // Используем другое имя переменной
+                string timeResult = stopwatch.Elapsed.TotalMilliseconds.ToString("0.000") + " мс";
+
+                lblOutput.Text += $"\n\nВремя выполнения: {timeResult}";
                 return;
             }
 
@@ -181,6 +179,11 @@ namespace lab_4_6_graph
             stopwatch.Stop();
 
             var sb = new StringBuilder();
+
+            // Используем другое имя переменной
+            string executionTime = stopwatch.Elapsed.TotalMilliseconds.ToString("0.000") + " мс";
+
+            sb.AppendLine($"Время выполнения: {executionTime}");
             sb.AppendLine($"Задача варианта 9: выход из пещеры {start}\n");
 
             if (path.Count == 0 || distances[exit] == int.MaxValue)
@@ -198,7 +201,6 @@ namespace lab_4_6_graph
                 sb.AppendLine($"\nОбщая длина маршрута: {distances[exit]}м");
                 sb.AppendLine($"Количество переходов: {path.Count - 1}");
             }
-            sb.AppendLine($"\nВремя выполнения: {stopwatch.ElapsedMilliseconds}мс");
 
             lblOutput.Text = sb.ToString();
         }

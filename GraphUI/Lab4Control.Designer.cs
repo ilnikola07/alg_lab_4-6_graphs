@@ -186,7 +186,7 @@
             Controls.Add(buttonLoadGraph);
             Name = "Lab4Control";
             Size = new Size(425, 363);
-            Load += Lab4Control_Load;
+            //Load += Lab4Control_Load;
             ResumeLayout(false);
             PerformLayout();
         }

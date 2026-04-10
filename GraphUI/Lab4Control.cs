@@ -13,12 +13,154 @@ using GraphLogic;
 namespace lab_4_6_graph
 {
     public partial class Lab4Control : UserControl
+
     {
         private CaveGraph caveSystem = new CaveGraph();
 
         public Lab4Control()
         {
             InitializeComponent();
+
+            buttonLoadGraph = new Button();
+
+        }
+
+
+
+        // Остальные методы...
+
+        private void buttonBFS_Click(object sender, EventArgs e)
+        {
+            string startNode = cmbStart.SelectedItem?.ToString();
+            if (string.IsNullOrEmpty(startNode))
+            {
+                lblOutput.Text = "Выберите стартовую вершину!";
+                return;
+            }
+
+            var stopwatch = Stopwatch.StartNew();
+            var result = caveSystem.GetBFS(startNode);
+            stopwatch.Stop();
+
+            var sb = new StringBuilder();
+            string executionTime = stopwatch.Elapsed.TotalMilliseconds.ToString("0.000") + " мс";
+
+            sb.AppendLine($"Время выполнения: {executionTime}");
+            sb.AppendLine("Порядок BFS:\n");
+            sb.AppendLine(string.Join("\n", result));
+
+            lblOutput.BackColor = Color.Transparent;
+            lblOutput.Text = sb.ToString();
+        }
+
+        private void btnFindComponents_Click(object sender, EventArgs e)
+        {
+            var stopwatch = Stopwatch.StartNew();
+            var components = caveSystem.FindConnectedComponents();
+            stopwatch.Stop();
+
+            lblOutput.Text = "";
+            lblOutput.BackColor = System.Drawing.Color.Transparent;
+
+            var sb = new StringBuilder();
+            string executionTime = stopwatch.Elapsed.TotalMilliseconds.ToString("0.000") + " мс";
+
+            sb.AppendLine($"Время выполнения: {executionTime}");
+
+            if (components == null || components.Count == 0)
+            {
+                sb.AppendLine("Граф пуст или не загружен!");
+                lblOutput.Text = sb.ToString();
+                return;
+            }
+
+            for (int i = 0; i < components.Count; i++)
+            {
+                sb.AppendLine($"Компонент №{i + 1}:");
+                sb.AppendLine(string.Join("\n", components[i]));
+                sb.AppendLine();
+            }
+
+            lblOutput.Text = sb.ToString();
+        }
+
+        private void btnCheckReachable_Click(object sender, EventArgs e)
+        {
+            if (cmbStart.Items.Count == 0 || cmbEnd.Items.Count == 0)
+            {
+                lblOutput.Text = "Сначала загрузите граф!";
+                return;
+            }
+
+            string from = cmbStart.SelectedItem?.ToString();
+            string to = cmbEnd.SelectedItem?.ToString();
+
+            if (string.IsNullOrEmpty(from) || string.IsNullOrEmpty(to))
+            {
+                MessageBox.Show("Выберите обе вершины!");
+                return;
+            }
+
+            var stopwatch = Stopwatch.StartNew();
+            try
+            {
+                bool isReachable = caveSystem.IsReachable(from, to);
+                stopwatch.Stop();
+
+                var sb = new StringBuilder();
+                string executionTime = stopwatch.Elapsed.TotalMilliseconds.ToString("0.000") + " мс";
+
+                sb.AppendLine($"Время выполнения: {executionTime}");
+
+                if (isReachable)
+                {
+                    sb.AppendLine($" '{to}' достижима из '{from}'");
+                }
+                else
+                {
+                    sb.AppendLine($" '{to}' НЕ достижима из '{from}'");
+                }
+
+                lblOutput.Text = sb.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка проверки: {ex.Message}", "Ошибка",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void buttonDFS_Click(object sender, EventArgs e)
+        {
+            // 1. Получаем стартовую вершину из выпадающего списка
+            string startNode = cmbStart.SelectedItem?.ToString();
+
+            if (string.IsNullOrEmpty(startNode))
+            {
+                lblOutput.Text = "Выберите стартовую вершину!";
+                return;
+            }
+
+            // Добавляем замер времени
+            var stopwatch = Stopwatch.StartNew();
+
+            // 2. Вызываем ваш метод обхода в глубину
+            var result = caveSystem.GetDFS(startNode);
+            stopwatch.Stop();
+
+            // Форматируем время
+            var sb = new StringBuilder();
+            string executionTime = stopwatch.Elapsed.TotalMilliseconds.ToString("0.000") + " мс";
+
+            // 3. Настраиваем внешний вид
+            lblOutput.BackColor = Color.Transparent;
+
+            // 4. Формируем строку с выводом времени в начале
+            sb.AppendLine($"Время выполнения: {executionTime}");
+            sb.AppendLine("Порядок обхода DFS:\n");
+            sb.AppendLine(string.Join("\n", result));
+
+            lblOutput.Text = sb.ToString();
         }
 
         private void buttonLoadGraph_Click(object sender, EventArgs e)
@@ -37,7 +179,7 @@ namespace lab_4_6_graph
                         caveSystem.Clear();
                         cmbStart.Items.Clear();
                         cmbEnd.Items.Clear();
-                        
+
 
                         // 2. Читаем файл построчно
                         string[] lines = File.ReadAllLines(ofd.FileName);
@@ -83,117 +225,6 @@ namespace lab_4_6_graph
                     }
                 }
             }
-        }
-        private void Lab4Control_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void buttonBFS_Click(object sender, EventArgs e)
-        {
-            // 1. Берем начальную вершину из комбобокса
-            string startNode = cmbStart.SelectedItem?.ToString();
-            if (string.IsNullOrEmpty(startNode))
-            {
-                lblOutput.Text = "Выберите стартовую вершину!";
-                return;
-            }
-
-            // 2. Получаем результат обхода BFS
-            var result = caveSystem.GetBFS(startNode);
-
-            // 3. Формируем вывод в столбик
-            lblOutput.BackColor = Color.Transparent; // Прозрачный фон
-            lblOutput.Text = "Порядок BFS:\n" + string.Join("\n", result);
-        }
-
-        private void btnFindComponents_Click(object sender, EventArgs e)
-        {
-            var components = caveSystem.FindConnectedComponents();
-
-            // Очистка и настройка прозрачности (можно сделать один раз в дизайнере)
-            lblOutput.Text = "";
-            lblOutput.BackColor = System.Drawing.Color.Transparent;
-
-            if (components == null || components.Count == 0)
-            {
-                lblOutput.Text = "Граф пуст или не загружен!";
-                return;
-            }
-
-            var sb = new System.Text.StringBuilder();
-
-            for (int i = 0; i < components.Count; i++)
-            {
-                sb.AppendLine($"Компонент №{i + 1}:");
-
-                // string.Join("\n", ...) выведет каждый элемент списка с новой строки
-                string namesInColumn = string.Join("\n", components[i]);
-                sb.AppendLine(namesInColumn);
-
-                sb.AppendLine(); // Пустая строка между компонентами
-            }
-
-            lblOutput.Text = sb.ToString();
-        }
-
-        private void btnCheckReachable_Click(object sender, EventArgs e)
-        {
-            if (cmbStart.Items.Count == 0 || cmbEnd.Items.Count == 0)
-            {
-                lblOutput.Text = "Сначала загрузите граф!";
-                return;
-            }
-
-            string from = cmbStart.SelectedItem?.ToString();
-            string to = cmbEnd.SelectedItem?.ToString();
-
-            if (string.IsNullOrEmpty(from) || string.IsNullOrEmpty(to))
-            {
-                MessageBox.Show("Выберите обе вершины!");
-                return;
-            }
-
-            try
-            {
-                bool isReachable = caveSystem.IsReachable(from, to);
-
-                if (isReachable)
-                {
-                    lblOutput.Text = $" '{to}' достижима из '{from}'";
-                }
-                else
-                {
-                    lblOutput.Text = $" '{to}' НЕ достижима из '{from}'";
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка проверки: {ex.Message}", "Ошибка",
-                               MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void buttonDFS_Click(object sender, EventArgs e)
-        {
-            // 1. Получаем стартовую вершину из выпадающего списка
-            string startNode = cmbStart.SelectedItem?.ToString();
-
-            if (string.IsNullOrEmpty(startNode))
-            {
-                lblOutput.Text = "Выберите стартовую вершину!";
-                return;
-            }
-
-            // 2. Вызываем ваш метод обхода в глубину
-            var result = caveSystem.GetDFS(startNode);
-
-            // 3. Настраиваем внешний вид (очистка происходит автоматически при присваивании =)
-            lblOutput.BackColor = Color.Transparent;
-
-            // 4. Формируем строку: заголовок + список через перенос строки (\n)
-            // string.Join("\n", result) расположит каждое название под предыдущим
-            lblOutput.Text = "Порядок обхода DFS:\n" + string.Join("\n", result);
         }
     }
 }

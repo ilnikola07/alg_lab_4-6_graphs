@@ -56,7 +56,7 @@
 UI Framework: Windows Forms (WinForms)
 
 
-Архитектура: Class Library (выделение логики в отдельный проект PowerLogic)
+Архитектура: Class Library (выделение логики в отдельный проект CaveGraph)
 
 
 Тестирование: xUnit

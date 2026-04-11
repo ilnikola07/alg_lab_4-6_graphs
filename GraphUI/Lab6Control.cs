@@ -149,7 +149,7 @@ namespace lab_4_6_graph
         private void btnVariantTask_Click(object sender, EventArgs e)
         {
             string start = cmbStart.SelectedItem?.ToString();
-            string exit = "Выход";
+            string exit = "12_Выход";
 
             if (string.IsNullOrEmpty(start))
             {

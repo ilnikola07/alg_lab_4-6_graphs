@@ -107,22 +107,33 @@ namespace GraphLogic
         }
 
         // DFS (Обход в глубину) - на основе рекурсии
-        public List<string> GetDFS(string startNode)
+        public List<string> GetDFS(string startNode, string endNode)
         {
             var visited = new List<string>();
-            DFS_Recursive(startNode, visited);
+            // Передаем оба параметра внутрь рекурсии
+            DFS_Recursive(startNode, endNode, visited);
             return visited;
         }
 
-        public void DFS_Recursive(string current, List<string> visited)
+        public bool DFS_Recursive(string current, string endNode, List<string> visited)
         {
-            if (!AdjacencyList.ContainsKey(current) || visited.Contains(current)) return;
+            if (visited.Contains(current)) return false;
 
             visited.Add(current);
-            foreach (var neighbor in AdjacencyList[current])
+
+            // Условие остановки: если текущая вершина и есть цель
+            if (current == endNode) return true;
+
+            if (AdjacencyList.ContainsKey(current))
             {
-                DFS_Recursive(neighbor.Target, visited);
+                foreach (var neighbor in AdjacencyList[current])
+                {
+                    // Если в глубине нашли цель, возвращаем true вверх по стеку
+                    if (DFS_Recursive(neighbor.Target, endNode, visited))
+                        return true;
+                }
             }
+            return false;
         }
 
         // Проверка достижимости (используем BFS)
@@ -266,52 +277,63 @@ namespace GraphLogic
         {
             var articulationPoints = new HashSet<string>();
             var visited = new HashSet<string>();
-            var disc = new Dictionary<string, int>(); // Время обнаружения вершины
-            var low = new Dictionary<string, int>();  // Самое раннее время обнаружения, доступное из поддерева
+            var disc = new Dictionary<string, int>();
+            var low = new Dictionary<string, int>();
             var parent = new Dictionary<string, string>();
             int time = 0;
 
-            // Вспомогательная рекурсивная функция
+            // 1. Создаем временный неориентированный список смежности
+            var undirectedAdj = new Dictionary<string, HashSet<string>>();
+            foreach (var node in AdjacencyList.Keys)
+            {
+                if (!undirectedAdj.ContainsKey(node)) undirectedAdj[node] = new HashSet<string>();
+                foreach (var edge in AdjacencyList[node])
+                {
+                    if (!undirectedAdj.ContainsKey(edge.Target)) undirectedAdj[edge.Target] = new HashSet<string>();
+                    undirectedAdj[node].Add(edge.Target);
+                    undirectedAdj[edge.Target].Add(node);
+                }
+            }
+
             void APUtil(string u)
             {
                 int children = 0;
                 visited.Add(u);
                 disc[u] = low[u] = ++time;
 
-                foreach (var neighborEdge in AdjacencyList[u])
+                if (!undirectedAdj.ContainsKey(u)) return;
+
+                foreach (var v in undirectedAdj[u])
                 {
-                    string v = neighborEdge.Target;
                     if (!visited.Contains(v))
                     {
                         children++;
                         parent[v] = u;
                         APUtil(v);
 
-                        // Обновляем low значение для u
                         low[u] = Math.Min(low[u], low[v]);
 
-                        // u является точкой сочленения в двух случаях:
-                        // 1) u - корень дерева обхода и имеет >= 2 детей
-                        if (parent.ContainsKey(u) == false && children > 1)
+                        // Случай 1: Корень с двумя и более детьми
+                        if (!parent.ContainsKey(u) && children > 1)
                             articulationPoints.Add(u);
 
-                        // 2) u не корень и low[v] >= disc[u]
+                        // Случай 2: Не корень и low[v] >= disc[u]
                         if (parent.ContainsKey(u) && low[v] >= disc[u])
                             articulationPoints.Add(u);
                     }
-                    else if (v != parent[u]) // Обратное ребро
+                    else if (parent.ContainsKey(u) && v != parent[u])
                     {
                         low[u] = Math.Min(low[u], disc[v]);
                     }
                 }
             }
 
-            // Запускаем поиск для каждой компоненты связности
-            foreach (var vertex in AdjacencyList.Keys)
+            // Запускаем обход для всех вершин из неориентированного графа
+            foreach (var vertex in undirectedAdj.Keys)
             {
                 if (!visited.Contains(vertex))
                 {
-                    parent[vertex] = null; // Корень не имеет родителя
+                    // Для корня родителя в словаре НЕ будет
                     APUtil(vertex);
                 }
             }

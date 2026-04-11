@@ -132,20 +132,22 @@ namespace lab_4_6_graph
 
         private void buttonDFS_Click(object sender, EventArgs e)
         {
-            // 1. Получаем стартовую вершину из выпадающего списка
+            // 1. Получаем стартовую и конечную вершины из выпадающих списков
             string startNode = cmbStart.SelectedItem?.ToString();
+            string endNode = cmbEnd.SelectedItem?.ToString(); // Добавили получение конечной точки
 
-            if (string.IsNullOrEmpty(startNode))
+            if (string.IsNullOrEmpty(startNode) || string.IsNullOrEmpty(endNode))
             {
-                lblOutput.Text = "Выберите стартовую вершину!";
+                lblOutput.Text = "Выберите и стартовую, и конечную вершины!";
                 return;
             }
 
             // Добавляем замер времени
             var stopwatch = Stopwatch.StartNew();
 
-            // 2. Вызываем ваш метод обхода в глубину
-            var result = caveSystem.GetDFS(startNode);
+            // 2. Вызываем метод, передавая ОБА аргумента
+            var result = caveSystem.GetDFS(startNode, endNode);
+
             stopwatch.Stop();
 
             // Форматируем время
@@ -155,13 +157,15 @@ namespace lab_4_6_graph
             // 3. Настраиваем внешний вид
             lblOutput.BackColor = Color.Transparent;
 
-            // 4. Формируем строку с выводом времени в начале
+            // 4. Формируем строку вывода
             sb.AppendLine($"Время выполнения: {executionTime}");
-            sb.AppendLine("Порядок обхода DFS:\n");
+            sb.AppendLine("Порядок обхода DFS:");
+            sb.AppendLine(); // Пустая строка для красоты
             sb.AppendLine(string.Join("\n", result));
 
             lblOutput.Text = sb.ToString();
         }
+
 
         private void buttonLoadGraph_Click(object sender, EventArgs e)
         {

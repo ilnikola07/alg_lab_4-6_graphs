@@ -114,6 +114,12 @@ namespace lab_4_6_graph
         {
             pnlContent.Visible = false; // Панель исчезнет с экрана
         }
+
+        private void btnAbout_Click(object sender, EventArgs e)
+        {
+            FormAbout formAbout = new FormAbout();
+            formAbout.Show();
+        }
     }
 }
 

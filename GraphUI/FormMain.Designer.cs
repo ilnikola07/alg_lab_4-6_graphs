@@ -50,6 +50,7 @@
             btnAbout.TabIndex = 0;
             btnAbout.Text = "Что это?";
             btnAbout.UseVisualStyleBackColor = true;
+            btnAbout.Click += btnAbout_Click;
             // 
             // button4lab
             // 
